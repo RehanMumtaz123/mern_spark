@@ -23,22 +23,24 @@ const Home = () => {
           src="https://mdbootstrap.com/img/Photos/Others/img(40).jpg"
           className="landing-wrapper size"
         />
-        <div class="bottom-left">
-        <span className="span">  Welcome to SNS BANK !! </span>
-          We give our customers a secure channel to transfer funds between different customers 
-
-          {/* <div class="bottom-right"> */}
+        <div className="">
+          <div className="bottom-left wwidth">
+            <span className="span"> Welcome to SNS BANK !! </span><br/><br/>
+            We give our customers a secure channel to transfer funds between
+            different customers
+            <div class="ppan">
             <nav className="one">
               <ul className="two">
                 <li className="three">
-                  <a href="/" className="four">
+                  <a href="/records" className="four">
                     Learn More
                   </a>
                   <span className="five"></span>
                 </li>
               </ul>
             </nav>
-          {/* </div> */}
+            </div>
+          </div>
         </div>
       </div>
 

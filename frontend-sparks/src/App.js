@@ -1,6 +1,7 @@
 import React from "react";
 import Nav from "./Components/Nav";
 import Data from "./Components/data";
+import Add from "./Components/AddUser";
 import Transfer from "./Components/Transfer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./Components/Home";
@@ -21,6 +22,10 @@ function App() {
           <Route path="/transfer">
             <Nav />
             <Transfer />
+          </Route>
+          <Route path="/adduser">
+            <Nav />
+            <Add />
           </Route>
         </Switch>
       </div>

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import SendIcon from "@material-ui/icons/Send";
+import EventIcon from "@material-ui/icons/Event";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import AlternateEmailIcon from "@material-ui/icons/AlternateEmail";
+import CallIcon from "@material-ui/icons/Call";
 import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import Menuitem from "@material-ui/core/MenuItem";
-import { useHistory } from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
 import "./Transfer.css";
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     width: {
       width: "420px",
-      marginTop: "20px",
+      marginTop: "15px",
       boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
       borderRadius: "5px",
       backdropFilter: "blur(12px)",
@@ -31,74 +32,54 @@ const useStyles = makeStyles((theme: Theme) =>
     doi: {
       width: "290px",
       padding: "13px",
-      textAlign: "center",
     },
   })
 );
-
 export default function BasicTextFields() {
-  const classes = useStyles();
-  const [user, setUser] = useState({ amount: "", accountType: "" });
   const history = useHistory();
-  const [send, setSend] = useState("");
-  const [recv, setRecv] = useState({
-    list: [],
-    reciever: "",
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    amount: "",
+    age: "",
+    accountType: "",
   });
-  const getdata = () => {
-    axios.get("http://localhost:15000/users").then((res) => {
-      console.log("result:", res.data);
-      setRecv({ list: res.data.map((idn) => idn.name) });
-    });
-  };
-  useEffect(() => {
-    getdata();
-  }, []);
-  const handleone = (e) => {
-    setSend(e.target.value);
-    // setRecv({ list: recv.list.filter((name) => name !== send) });
-    // console.log("send batao ", send);
-    // console.log("recieve batao ", recv.list);
-  };
-  const handletwo = (e) => {
-    setRecv({ ...recv, reciever: e.target.value });
-  };
-
   let name, value;
-  const handleall = (e) => {
+
+  const validateInput = (e) => {
+    console.log(e);
     name = e.target.name;
     value = e.target.value;
     setUser({ ...user, [name]: value });
   };
 
-  const postData = async (e) => {
+  const PostData = async (e) => {
     e.preventDefault();
-    const { amount, accountType } = user;
-    const sender = send;
-    const recciever = recv.reciever;
-    const url = `http://localhost:15000/transfer/${sender}&${recciever}`;
     try {
-      const res = await fetch(url, {
-        method: "PATCH",
+      const { name, email, phone, amount, age, accountType } = user;
+      const res = await fetch("http://localhost:15000/add", {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ amount }),
+        body: JSON.stringify({ name, email, phone, amount, age, accountType }),
       });
       const data = await res.json();
       if (data) {
         console.log("data chalaga :", data);
         window.alert("succes");
-        history.push("/records");
+        history.push("/");
       } else {
         console.log("eeror");
         window.alert("fail");
       }
     } catch (error) {
       console.log(error);
-      console.log("whole : ", sender, recciever, amount, accountType);
     }
   };
+  const classes = useStyles();
+
   return (
     <>
       <div className="bg">
@@ -111,6 +92,7 @@ export default function BasicTextFields() {
               display: "flex",
               justifyContent: "center",
               margin: "auto",
+
               marginTop: "15px",
             }}
           >
@@ -118,28 +100,24 @@ export default function BasicTextFields() {
               className={classes.width}
               style={{ border: "3px solid black" }}
             >
-              <div className="p-4">
-                <h1 className="p-4 text-center b">
-                  Money Transfer
-                  <CheckCircleOutlineIcon
-                    style={{ color: "green" }}
-                    fontSize="large"
-                  />{" "}
-                </h1>
+              <div className="p-2">
+                <h1 className="p-3 text-center b">Registeration.. 🚀</h1>
                 <form
-                  method="PATCH"
+                  method="POST"
                   className={classes.root}
                   noValidate
                   autoComplete="off"
                 >
                   <TextField
-                    id="standard-select-currency"
-                    select
+                    id="standard-textarea"
+                    label="Name"
+                    name="name"
+                    value={user.name}
+                    onChange={validateInput}
                     required
+                    placeholder="Your Name"
+                    multiline
                     className={classes.doi}
-                    value={send}
-                    onChange={handleone}
-                    label="Sender's Name"
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -147,53 +125,60 @@ export default function BasicTextFields() {
                         </InputAdornment>
                       ),
                     }}
-                  >
-                    {recv.list.map((option, index) => {
-                      return (
-                        <Menuitem key={index} value={option}>
-                          {option}
-                        </Menuitem>
-                      );
-                    })}
-                  </TextField>
-
+                  />
                   <br />
 
                   <TextField
-                    id="standard-select-currency"
-                    required
+                    id="standard-textarea"
+                    label="Email"
+                    type="email"
+                    name="email"
+                    value={user.email}
+                    onChange={validateInput}
+                    placeholder="Your Email"
+                    multiline
                     className={classes.doi}
-                    select
-                    value={recv.reciever}
-                    onChange={handletwo}
-                    label="Reciever's Name"
+                    required
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
-                          <AccountCircle />
+                          <AlternateEmailIcon />
                         </InputAdornment>
                       ),
                     }}
-                  >
-                    {recv.list
-                      .filter((name) => name !== send)
-                      .map((option, index) => {
-                        return (
-                          <Menuitem key={index} value={option}>
-                            {option}
-                          </Menuitem>
-                        );
-                      })}
-                  </TextField>
+                  />
                   <br />
+                  <TextField
+                    id="standard-number"
+                    placeholder="Your Phone #"
+                    label="Phone Number"
+                    type="number"
+                    name="phone"
+                    value={user.phone}
+                    onChange={validateInput}
+                    className={classes.doi}
+                    prefix="+"
+                    required
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <CallIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
                   <TextField
                     id="standard-number"
                     label="Amount"
                     type="number"
-                    className={classes.doi}
+                    placeholder="Current Balance"
                     name="amount"
                     value={user.amount}
-                    onChange={handleall}
+                    onChange={validateInput}
+                    className={classes.doi}
                     prefix="$"
                     required
                     InputLabelProps={{
@@ -209,14 +194,35 @@ export default function BasicTextFields() {
                   />
                   <br />
                   <TextField
-                    label="Account Type"
+                    id="standard-textarea"
+                    label="Age"
+                    required
+                    type="number"
+                    name="age"
+                    value={user.age}
+                    onChange={validateInput}
+                    placeholder="Your age"
+                    multiline
+                    className={classes.doi}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <EventIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+
+                  <br />
+                  <TextField
+                    label="Normal"
                     id="margin-normal"
-                    name="accountType"
-                    value={user.accountType}
-                    onChange={handleall}
                     defaultValue="Basic"
                     className={classes.doi}
                     margin="normal"
+                    name="accountType"
+                    value={user.accountType}
+                    onChange={validateInput}
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="start">
@@ -229,8 +235,8 @@ export default function BasicTextFields() {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={postData}
                     className={classes.button}
+                    onClick={PostData}
                     style={{
                       textAlign: "center",
                       marginLeft: "10px",
@@ -238,7 +244,7 @@ export default function BasicTextFields() {
                     }}
                     endIcon={<SendIcon />}
                   >
-                    Transact
+                    Submit
                   </Button>
                 </form>
               </div>
@@ -246,6 +252,7 @@ export default function BasicTextFields() {
           </div>
         </div>
       </div>
+      <br />
       <div className="container-fluid ">
         <div className="row foot">
           <div className="col footer-one">

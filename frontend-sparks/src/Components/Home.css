@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +13,6 @@
   background-repeat: no-repeat;
   background-position: top center;
   opacity: 0.8;
-
 }
 .size {
   width: 100%;
@@ -54,10 +56,11 @@
 }
 .bottom-left {
   position: absolute;
-  width: 430px;
+  width: 530px;
   bottom: 98px;
-  left: 16px;
-  text-align: justify;
+  left: 396px;
+  top: 400;
+  text-align: center;
   font-size: xx-large;
   font: bolder;
   font-family: cursive;
@@ -68,7 +71,8 @@
   text-decoration: none;
 }
 .one .two .three {
-  --c: goldenrod;
+  --c: lightBlue;
+  padding: -20px;
   color: var(--c);
   font-size: 16px;
   border: 0.3em solid var(--c);
@@ -90,7 +94,7 @@
 
 .one .two .three .five {
   position: absolute;
-  width: 24%;
+  width: 27%;
   height: 50%;
   background-color: var(--c);
   transform: translateY(410%);
@@ -105,14 +109,14 @@
 }
 
 .one .two .three:hover {
-  color: black;
+  color: white;
 }
 
 .one .two .three:hover .five {
   transform: translateX(0) scale(8);
 }
 
-nav ul li span:nth-child(1) {
+.one .two .three .five:nth-child(1) {
   --n: 1;
 }
 .bottom-right {
@@ -122,4 +126,27 @@ nav ul li span:nth-child(1) {
 }
 .span {
   font-size: 60px;
+  text-align: center;
+  margin: auto;
+  font-family: Kaushan Script;
+  padding: 80px;
+}
+.ppan {
+  /* font-size: 60px; */
+  text-align: center;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+.wwidth {
+  /* border: 4px solid black; */
+  width: 850px;
+  margin-top: 15px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  color: black;
+  font-variant: small-caps;
+  border-radius: 5px;
+  backdrop-filter: blur(2px);
+  background-color: rgba(255, 255, 255, 0.2);
 }

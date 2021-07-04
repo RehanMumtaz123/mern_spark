@@ -6,10 +6,10 @@ router.post("/add", (req, res) => {
   if (!name || !email || !accountType || !phone || !age || !amount) {
     res.status(422).json({ message: "All fields need to be filled" });
   }
-  User.find({ email: email })
+  User.findOne({ email: email })
     .then((data) => {
       console.log("daA", data);
-      if (!data) {
+      if (data) {
         res.status(421).json({ message: "This person exists" });
       } else {
         const user = new User({ name, email, accountType, phone, age, amount });
