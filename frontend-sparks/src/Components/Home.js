@@ -64,6 +64,12 @@ const Home = () => {
                   <div className="col icon">
                     <GitHubIcon />
                     <p className="text-light">GitHub</p>
+                    
+                  </div>
+                  <div className="col icon">
+                    <GitHubIcon />
+                    <p className="text-light">GitHub</p>
+
                   </div>
                   <div className="col icon">
                     <TwitterIcon className="text-primary " />
