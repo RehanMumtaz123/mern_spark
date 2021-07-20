@@ -25,7 +25,7 @@ const Home = () => {
         />
         <div className="">
           <div className="bottom-left wwidth">
-            <span className="span"> Welcome to SNS BANK !! </span><br/><br/>
+            <span className="span"> Welcome to Sns Bank !! </span><br/><br/>
             We give our customers a secure channel to transfer funds between
             different customers
             <div class="ppan">
@@ -44,7 +44,7 @@ const Home = () => {
         </div>
       </div>
 
-      <footer className="footer">
+      {/* <footer className="footer">
         <div
           className="container"
           style={{ borderBlockColor: "1px solid black" }}
@@ -84,11 +84,11 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </footer>
+      </footer> */}
       <div className="container-fluid">
         <div className="row foot">
           <div className="col footer-one">
-            SSM Corporation © 2021 | All rights Reserved
+            SNS Corporation © 2021 | All rights Reserved | Made By <span style={{fontWeight:'bolder'}}> Rehan Mumtaz 💖 </span>
           </div>
         </div>
       </div>

@@ -212,7 +212,7 @@ const Data = () => {
       <div className="container-fluid">
         <div className="row foot">
           <div className="col footer-one">
-            SSM Corporation © 2021 | All rights Reserved
+            SSM Corporation © 2021 | All rights Reserved | Made By <span style={{fontWeight:'bolder'}}> Rehan Mumtaz 💖  </span>
           </div>
         </div>
       </div>

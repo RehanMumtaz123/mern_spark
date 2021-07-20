@@ -18,14 +18,14 @@ function App() {
           <Route path="/records">
             <Nav />
             <Data />
+          </Route> 
+          <Route path="/adduser">
+            <Nav />
+            <Add />
           </Route>
           <Route path="/transfer">
             <Nav />
             <Transfer />
-          </Route>
-          <Route path="/adduser">
-            <Nav />
-            <Add />
           </Route>
         </Switch>
       </div>
